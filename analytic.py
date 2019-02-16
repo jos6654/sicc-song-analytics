@@ -11,7 +11,14 @@
 # Overall positivity/negativity
 # Release history
 
-class Analytic:
+from abc import ABC, abstractmethod
 
-    pass
+class Analytic(ABC):
 
+    def __init__(self, lyric_list: list):
+        self.lyric_list = lyric_list
+        super().__init__()
+
+    @abstractmethod
+    def analyze(self):
+        pass
