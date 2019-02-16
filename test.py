@@ -3,6 +3,7 @@
 
 
 import requests
+import re
 from bs4 import BeautifulSoup
 
 
@@ -44,8 +45,15 @@ def scrape_lyrics(url):
     page = requests.get(url)
     html = BeautifulSoup(page.text, "html.parser")
     lyrics = html.find('div', class_="lyrics").get_text()
+
+    # capture all bracketed section of lyrics (ie: [Chorus], [Bridge], [Verse 1])
+    # and replace with nothing
+    lyrics = re.sub(r'\[[^\]]+\]', '', lyrics)
+    
     print(lyrics)
 
 print(get_artist_id(artist))
 songs = get_song_url_list(get_artist_id(artist))
 scrape_lyrics( songs[0] )
+
+# regex to match meta song info ex = [Chrous], [Bridge] : r'\[[^\]]'
