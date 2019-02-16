@@ -41,6 +41,7 @@ def get_song_url_list(id):
 
     return url_list
 
+
 def scrape_lyrics(url):
     page = requests.get(url)
     html = BeautifulSoup(page.text, "html.parser")
