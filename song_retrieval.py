@@ -10,8 +10,8 @@ from fuzzywuzzy import fuzz
 
 
 # TESTING VARIABLES
-song = "uptown girl"
-artist = "billy joel"
+#song = "uptown girl"
+artist = "drake"
 
 # TODO REMOVE FROM CODE EVENTUALlY
 access_token = '8ufzdCrKWOB3Gfgx6VJgenQt531yP7KGHM4tk_3u3LD7xA0J1nexqUnHgH5LJjPD'
@@ -63,6 +63,8 @@ def get_song_url_list(id: int) -> list:
     url_list = []
     title_list = []
     for song in json['response']['songs']:
+        if song['primary_artist']['id'] != id:
+            continue
         title = song['title']
         if not (duplicate_title(title_list, title)):
             title_list.append(title)
@@ -84,7 +86,7 @@ def duplicate_title(title_list: list, title: str) -> bool:
             return True
     return False
 
-def scrape_lyrics(url: str) -> str:
+def scrape_lyrics(url: str) -> list:
     """Gets the lyrics from a song's url
 
     Args:
@@ -106,8 +108,12 @@ def scrape_lyrics(url: str) -> str:
     lyrics = re.sub(r'\s+', ' ', lyrics)
     
     # remove all punctuation (beside apostrophe)
-    lyrics = re.sub(r'[().?:,]', '', lyrics)
-    
+    lyrics = re.sub(r'[().?:,!]', '', lyrics)
+
+    # split up by spaces into a list
+    lyrics = lyrics.lower().split(" ")
+
+    print(lyrics)
     return lyrics
 
 
