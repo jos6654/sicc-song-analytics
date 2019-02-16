@@ -6,10 +6,9 @@
 # Implemented:
     # Most common word
     # Number of songs
+    # Size of vocab
 
 # To-Do:
-    # Number of albums
-    # Size of vocab
     # Overall positivity/negativity
     # Release history
 
