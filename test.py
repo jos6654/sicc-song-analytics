@@ -50,6 +50,12 @@ def scrape_lyrics(url):
     # and replace with nothing
     lyrics = re.sub(r'\[[^\]]+\]', '', lyrics)
     
+    # replace all series of whitespace with a single space
+    lyrics = re.sub(r'\s+', ' ', lyrics)
+    
+    # remove all punctuation (beside apostrophe)
+    lyrics = re.sub(r'[.?:]', '', lyrics)
+    
     print(lyrics)
 
 print(get_artist_id(artist))
