@@ -1,7 +1,6 @@
 import mysql.connector
 
 db = mysql.connector.connect(host='localhost', user='root', passwd='Cc20178452#1')
-
 cursor = db.cursor()
 cursor.execute("USE songDatabase")
 
