@@ -108,7 +108,7 @@ def scrape_lyrics(url: str) -> str:
     # remove all punctuation (beside apostrophe)
     lyrics = re.sub(r'[().?:,]', '', lyrics)
     
-    print(lyrics)
+    return lyrics
 
 
 
