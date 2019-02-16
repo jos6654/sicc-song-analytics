@@ -114,7 +114,6 @@ def scrape_lyrics(url: str) -> list:
     # split up by spaces into a list
     lyrics = lyrics.lower().split(" ")
 
-    print(lyrics)
     return lyrics
 
 
@@ -125,7 +124,7 @@ songs = get_song_url_list(get_artist_id(artist))
 
 lyric_list = []
 for song in songs:
-    lyric_list.append(scrape_lyrics(song).split(' '))
+    lyric_list.append(scrape_lyrics(song))
 
 #
-test = CommonWords(lyric_list).analyze()
+CommonWords(lyric_list).analyze()
