@@ -51,22 +51,3 @@ def get_song(artist_id: str, song_name:str):
     return song
 
 
-# TESTING#
-
-# Insert artists and songs #
-insert_artist("13579", "XXXTENTACION")
-insert_artist("2468", "Muse")
-insert_song("13579", "SAD!")
-insert_song("2468", "Something Human")
-
-# Retrieve songs and artists #
-artist1 = get_artist("13579")
-print(artist1)
-artist2 = get_artist("2468")
-print(artist2)
-
-song1 = get_song("13579", "SAD!")
-print(song1)
-song2 = get_song("2468", "Something Human")
-print(song1)
-
