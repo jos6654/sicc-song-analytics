@@ -12,6 +12,11 @@ from bs4 import BeautifulSoup
 song = "uptown girl"
 artist = "billy joel"
 
+
+# TODO REMOVE FROM CODE EVENTUALlY
+access_token = '8ufzdCrKWOB3Gfgx6VJgenQt531yP7KGHM4tk_3u3LD7xA0J1nexqUnHgH5LJjPD'
+
+
 def get_artist_id(artist_name: str) -> int:
     """Gets the artist's id from Genius
 
@@ -24,7 +29,7 @@ def get_artist_id(artist_name: str) -> int:
 
     # build and send search request to genius api
     base_url = 'https://api.genius.com'
-    headers = {'Authorization': 'Bearer ' + '8ufzdCrKWOB3Gfgx6VJgenQt531yP7KGHM4tk_3u3LD7xA0J1nexqUnHgH5LJjPD'}
+    headers = {'Authorization': f'Bearer {access_token}'}
     search_url = base_url + '/search'
     data = {'q': artist_name}
     response = requests.get(search_url, data=data, headers=headers)
@@ -50,7 +55,7 @@ def get_song_url_list(id: int) -> list:
 
     # build and send search request to genius api
     base_url = 'https://api.genius.com'
-    headers = {'Authorization': 'Bearer ' + '8ufzdCrKWOB3Gfgx6VJgenQt531yP7KGHM4tk_3u3LD7xA0J1nexqUnHgH5LJjPD'}
+    headers = {'Authorization': f'Bearer {access_token}'}
     search_url = f'{base_url}/artists/{id}/songs'
     response = requests.get(search_url, headers=headers)
     
