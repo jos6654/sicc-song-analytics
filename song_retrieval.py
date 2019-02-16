@@ -12,6 +12,8 @@ from analytics.common_words import CommonWords
 
 # TESTING VARIABLES
 #song = "uptown girl"
+from analytics.song_number import SongNumber
+
 artist = "drake"
 
 # TODO REMOVE FROM CODE EVENTUALlY
@@ -57,7 +59,7 @@ def get_song_url_list(id: int) -> list:
     # build and send search request to genius api
     base_url = 'https://api.genius.com'
     headers = {'Authorization': f'Bearer {access_token}'}
-    search_url = f'{base_url}/artists/{id}/songs'
+    search_url = f'{base_url}/artists/{id}/songs?per_page=50'
     response = requests.get(search_url, headers=headers)
     
     json = response.json()
@@ -117,14 +119,15 @@ def scrape_lyrics(url: str) -> list:
     return lyrics
 
 
+#Tests
 
-print(get_artist_id(artist))
-songs = get_song_url_list(get_artist_id(artist))
-
-
-lyric_list = []
-for song in songs:
-    lyric_list.append(scrape_lyrics(song))
-
+# print(get_artist_id(artist))
+# songs = get_song_url_list(get_artist_id(artist))
 #
-CommonWords(lyric_list).analyze()
+#
+# lyric_list = []
+# for song in songs:
+#     lyric_list.append(scrape_lyrics(song))
+#
+# test = SongNumber(lyric_list).analyze()
+# print(test)
