@@ -2,7 +2,7 @@
 
 from analytic import Analytic
 
-class Song_Number(Analytic):
+class SongNumber(Analytic):
 
     def analyze(self):
         return len(self.lyric_list)
