@@ -8,17 +8,12 @@ import re
 from bs4 import BeautifulSoup
 from fuzzywuzzy import fuzz
 from analytics.common_words import CommonWords
-
-
-# TESTING VARIABLES
-#song = "uptown girl"
 from analytics.song_number import SongNumber
 
-artist = "drake"
 
-# TODO REMOVE FROM CODE EVENTUALlY
+artist = "slaughter beach, dog"
+
 access_token = '8ufzdCrKWOB3Gfgx6VJgenQt531yP7KGHM4tk_3u3LD7xA0J1nexqUnHgH5LJjPD'
-
 
 def get_artist_id(artist_name: str) -> int:
     """Gets the artist's id from Genius
@@ -44,7 +39,6 @@ def get_artist_id(artist_name: str) -> int:
         # if the artist we searched for is this hit, return the artist's id
         if artist.lower() in hit['result']['primary_artist']['name'].lower():
             return hit['result']['primary_artist']['id']
-
 
 def get_song_url_list(id: int) -> list:
     """Gets list of urls of songs by an artist
@@ -116,18 +110,41 @@ def scrape_lyrics(url: str) -> list:
     # split up by spaces into a list
     lyrics = lyrics.lower().split(" ")
 
-    return lyrics
+    # remove the unneccessary words and return the finalized lyrics
+    return remove_unneccessary_words(lyrics)
 
+def remove_unneccessary_words(lyrics: list) -> list:
+    """ Removes words that are irrelevant to analytics
+
+    Args:
+        lyrics: list of all words in lyrics of a song
+    
+    Return:
+        Lyrics with unneccesary words removed
+    """
+
+    # list of words we want to remove
+    words = ['', 'the', 'i', 'a', 'an', 'of', 'with', 'at', 'from', 'into', 'and', 'or', 'but', 'so', 'for', 'yet', 'as', 'because', 'since', 'this', 'that', 'these', 'those']
+
+    return list(set(lyrics) - set(words))
+
+    
 
 #Tests
 
-# print(get_artist_id(artist))
-# songs = get_song_url_list(get_artist_id(artist))
-#
-#
-# lyric_list = []
-# for song in songs:
-#     lyric_list.append(scrape_lyrics(song))
-#
-# test = SongNumber(lyric_list).analyze()
-# print(test)
+"""
+print(get_artist_id(artist))
+songs = get_song_url_list(get_artist_id(artist))
+
+
+lyric_list = []
+for song in songs:
+    lyric_list.append(scrape_lyrics(song))
+
+print(lyric_list[1])
+
+#test = SongNumber(lyric_list).analyze()
+#print(test)
+
+print()
+"""
