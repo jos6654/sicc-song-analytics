@@ -7,6 +7,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 from fuzzywuzzy import fuzz
+from analytics.common_words import CommonWords
 
 
 # TESTING VARIABLES
@@ -114,4 +115,11 @@ def scrape_lyrics(url: str) -> str:
 
 print(get_artist_id(artist))
 songs = get_song_url_list(get_artist_id(artist))
-scrape_lyrics( songs[0] )
+
+
+lyric_list = []
+for song in songs:
+    lyric_list.append(scrape_lyrics(song).split(' '))
+
+#
+test = CommonWords(lyric_list).analyze()

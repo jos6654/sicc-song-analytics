@@ -16,6 +16,7 @@ from abc import ABC, abstractmethod
 class Analytic(ABC):
 
     def __init__(self, lyric_list: list):
+        # lyric_list is list of lists of strings that are the words to a song
         self.lyric_list = lyric_list
         super().__init__()
 
