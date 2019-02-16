@@ -6,6 +6,7 @@
 import requests
 import re
 from bs4 import BeautifulSoup
+from fuzzywuzzy import fuzz
 
 
 # TESTING VARIABLES
@@ -60,10 +61,19 @@ def get_song_url_list(id: int) -> list:
     
     json = response.json()
     url_list = []
+    title_list = []
     for song in json['response']['songs']:
-        url_list.append(song['url'])
-
+        title = song['title']
+        if not (duplicate_title(title_list, title)):
+            title_list.append(title)
+            url_list.append(song['url'])
     return url_list
+
+def duplicate_title(title_list, title):
+    for t in title_list:
+        if fuzz.token_set_ratio(t, title) > 90:
+            return True
+    return False
 
 def scrape_lyrics(url: str) -> str:
     """Gets the lyrics from a song's url
