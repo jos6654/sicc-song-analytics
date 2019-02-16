@@ -16,9 +16,10 @@ from abc import ABC, abstractmethod
 
 class Analytic(ABC):
 
-    def __init__(self, lyric_list: list):
+    def __init__(self, lyric_list = [], url_list = []):
         # lyric_list is list of lists of strings that are the words to a song
         self.lyric_list = lyric_list
+        self.url_list = url_list
         super().__init__()
 
     @abstractmethod
