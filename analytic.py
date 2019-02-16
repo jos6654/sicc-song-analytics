@@ -3,13 +3,15 @@
 # Parent class of all analytics
 
 # Possible analytics:
+# Implemented:
+    # Most common word
+    # Number of songs
 
-# Number of songs
-# Number of albums
-# Most common word
-# Size of vocab
-# Overall positivity/negativity
-# Release history
+# To-Do:
+    # Number of albums
+    # Size of vocab
+    # Overall positivity/negativity
+    # Release history
 
 from abc import ABC, abstractmethod
 
