@@ -69,7 +69,16 @@ def get_song_url_list(id: int) -> list:
             url_list.append(song['url'])
     return url_list
 
-def duplicate_title(title_list, title):
+def duplicate_title(title_list: list, title: str) -> bool:
+    """Checks if the given title is already in the list, based on string similaritys
+
+    Args:
+        title_list: List of titles
+        title: Title we're checkint to see if there is a duplicate
+
+    Returns:
+        Bool representing whether the title is a dublicate or not
+    """
     for t in title_list:
         if fuzz.token_set_ratio(t, title) > 90:
             return True
@@ -102,8 +111,7 @@ def scrape_lyrics(url: str) -> str:
     print(lyrics)
 
 
-"""
+
 print(get_artist_id(artist))
 songs = get_song_url_list(get_artist_id(artist))
 scrape_lyrics( songs[0] )
-"""
