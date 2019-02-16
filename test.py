@@ -5,7 +5,7 @@
 import requests
 import re
 from bs4 import BeautifulSoup
-
+from fuzzywuzzy import fuzz
 
 # TESTING VARIABLES
 song = "uptown girl"
@@ -31,16 +31,24 @@ def get_song_url_list(id):
     # build and send search request to genius api
     base_url = 'https://api.genius.com'
     headers = {'Authorization': 'Bearer ' + '8ufzdCrKWOB3Gfgx6VJgenQt531yP7KGHM4tk_3u3LD7xA0J1nexqUnHgH5LJjPD'}
-    search_url = f'{base_url}/artists/{id}/songs'
+    search_url = f'{base_url}/artists/{id}/songs?per_page=200'
     response = requests.get(search_url, headers=headers)
     
     json = response.json()
     url_list = []
+    title_list = []
     for song in json['response']['songs']:
-        url_list.append(song['url'])
-
+        title = song['title']
+        if not(duplicate_title(title_list, title)):
+            title_list.append(title)
+            url_list.append(song['url'])
     return url_list
 
+def duplicate_title(title_list, title):
+    for t in title_list:
+        if fuzz.token_set_ratio(t, title) > 90:
+            return True
+    return False
 
 def scrape_lyrics(url):
     page = requests.get(url)
@@ -53,8 +61,8 @@ def scrape_lyrics(url):
     
     print(lyrics)
 
-print(get_artist_id(artist))
+# print(get_artist_id(artist))
 songs = get_song_url_list(get_artist_id(artist))
-scrape_lyrics( songs[0] )
+# scrape_lyrics( songs[0] )
 
 # regex to match meta song info ex = [Chrous], [Bridge] : r'\[[^\]]'
