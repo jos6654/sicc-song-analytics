@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import logging
 from logging.handlers import RotatingFileHandler
 import json
+import song_retrieval
 
 app = Flask(__name__)
 
@@ -11,8 +12,13 @@ def hello_world():
 
 @app.route('/analyze', methods=['POST'])
 def analyze():
-
+    #DEBUG
     app.logger.warning(request.get_json())
+
+    # retrieve artist from request
+    artist = request.get_json()['artist']
+    
+    if song_retrieval.get_artist_id(artist)
 
     #TODO:
     # request recieved, now we have to get artist ID
