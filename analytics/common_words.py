@@ -20,6 +20,10 @@ class CommonWords(Analytic):
         
         s = sorted(word_dict.items(), key = lambda x: x[1], reverse = True)
 
+        for w in s:
+            if len(w[0]) >= 5:
+                return w[0]
+        
         print(f"Total Words: {total_words}")
 
         return s[0]

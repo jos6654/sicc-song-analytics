@@ -158,7 +158,7 @@ def perform_analytics(artistID, artistName):
             lyric_list.append(lyric)
 
     # run all analytics
-    common_word = CommonWords(lyric_list=lyric_list).analyze()[0]
+    common_word = CommonWords(lyric_list=lyric_list).analyze()
 
     song_number = SongNumber(lyric_list=lyric_list).analyze()
 
