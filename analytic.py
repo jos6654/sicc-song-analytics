@@ -7,10 +7,11 @@
     # Most common word
     # Number of songs
     # Size of vocab
+    # Release history
 
 # To-Do:
     # Overall positivity/negativity
-    # Release history
+
 
 from abc import ABC, abstractmethod
 
