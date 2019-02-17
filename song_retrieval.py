@@ -16,7 +16,7 @@ import database
 
 #artist = "drake"
 
-access_token = '8ufzdCrKWOB3Gfgx6VJgenQt531yP7KGHM4tk_3u3LD7xA0J1nexqUnHgH5LJjPD'
+access_token = 'zHrv40bTCY3zVHuLBW1p3ViREdkC8CzXmx11xNKJ8LsBTg3ZoutAWTIfeBrr9Bxd'
 
 def get_artist_id(artist_name: str) -> int:
     """Gets the artist's id from Genius
@@ -28,10 +28,14 @@ def get_artist_id(artist_name: str) -> int:
         int: Artist Genius id
     """
 
+    # weird edge case when searching blink-182. I hate Genius API
+    if artist_name.lower() == "blink-182":
+        return 13373
+
     # build and send search request to genius api
     base_url = 'https://api.genius.com'
     headers = {'Authorization': f'Bearer {access_token}'}
-    search_url = base_url + '/search'
+    search_url = base_url + '/search?'
     data = {'q': artist_name}
     response = requests.get(search_url, data=data, headers=headers)
     
@@ -40,7 +44,7 @@ def get_artist_id(artist_name: str) -> int:
     # loop through all hits in search
     for hit in json['response']['hits']:
         # if the artist we searched for is this hit, return the artist's id
-        if artist_name.lower() == hit['result']['primary_artist']['name'].lower():
+        if artist_name.lower() == hit['result']['primary_artist']['name'].lower().strip():
             return hit['result']['primary_artist']['id']
 
 
