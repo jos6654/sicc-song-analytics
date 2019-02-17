@@ -6,6 +6,7 @@ $(document).ready(function(){
     console.log('Page Loaded');
 
     // on click event of submit button
+
     $("#submit-data").click(function(){
         // post form data to /analyze
         $.ajax({
@@ -26,4 +27,10 @@ $(document).ready(function(){
     })
 
 });
+
+$(window).load(function() {
+    $(".loader").fadeOut("slow");
+});
+
+
 
