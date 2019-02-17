@@ -30,6 +30,8 @@ Our main problem was the Genius API. We feel that there is much to be improved, 
 
 Another odd issue with their API was that 'blink-182's artist name is stored with 2 zero width space characters (\u200b) preceding their name. **WHY?** There is no reason at all, and blink-182 is the **ONLY** artist where this is the case. It's especially unfortunate because blink-182 is Ryan's favorite band.
 
+Another issue we ran into was that on Genius, anyone can add a song for an artist. This didn't affect small artists, but for an artist like Drake, this resulted in us getting a lot of garbage data that we didn't care about. We couldn't find a way to prevent this either. This was kind of unavoidable as we see it, due to Genius being a community driven service, there are bound to be some user faults.
+
 ## What did we learn?
 
 ### Joe
@@ -50,11 +52,20 @@ Piggybacking off of what Joe said, I learned the valuable lesson of learning how
 
 I also learned how to write code that interacts with a database, which is definitely a skill I'll be using the future.
 
+## What would we change?
+
+If it wasn't apparent by now, we should've looked into other song lyric APIs, as Genius wasn't as good for our purposes as we had hoped. We would've looked more into other lyric APIs.
+
+Other changes would be more modern web page design, but that wasn't a priority for us. We just wanted to make sure the data was received. We focused on function instead of asthetic, mostly because this isn't a project we will try to market, but test of our abilities.
+
 ## General points
 
 * Is this project perfect? No.
 * Is this project going to get worked on after BrickHack 5? Probably not.
 * Is the code the most beautiful thing ever? We'd like to think so, but it has its short comings.
-* This was a learning experience for all of us, and we can all say that we've learned quite a bit!
 
 But all of this is OK! This is a learning experience for us and it's been a ton of fun!
+
+## Side notes
+
+Running this project takes a bit of work, as you need to modify the database login in `database.py`, and modify the access token for the Genius API in `song_retrieval.py`. Once that's going, it's a standard Flask app to be ran.
