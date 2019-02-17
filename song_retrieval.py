@@ -134,7 +134,7 @@ def remove_unneccessary_words(lyrics: list) -> list:
 
     return list(set(lyrics) - set(words))
 
-def perform_analytics(artistID):
+def perform_analytics(artistID, artistName):
     """
     Given that the analytics for a particular artist haven't been
     calculated, take the artistID and calculate all analytics and
@@ -155,6 +155,9 @@ def perform_analytics(artistID):
 
     release_history = ReleaseHistory(url_list=song_urls).analyze()
 
+    data = {"name": artistName, "releaseHistory": release_history, "commonWord":common_word, "numSongs": song_number, "sizeVocab":vocabulary_size}
+
+    database.insert_artist(str(artistID), data)
 
 #TODO remove this eventually
 def main():
