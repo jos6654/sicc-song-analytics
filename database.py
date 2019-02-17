@@ -37,7 +37,7 @@ def check_artist(artist_id: str):
     sql = "SELECT artistID FROM artist WHERE artistID = %s"
     val = (artist_id,)
     cursor.execute(sql, val)
-    print(cursor.fetchall())
+    cursor.fetchall()
     if cursor.rowcount == 0:
         result = False
     else:

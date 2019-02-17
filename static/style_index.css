@@ -7,8 +7,9 @@ h1{
     text-align: center;
 }
 
-.inputBox{
-    text-align: center;
+#container{
+    margin: auto;
+    width: 50%;
 }
 
 .area{
