@@ -24,8 +24,11 @@ class ReleaseHistory(Analytic):
                     result = re.findall(r"\d{4,}", i)
                     if result:
                         date_list.append(int(result[0]))
-        print(date_list)
-        return date_list
+        date_string = ""
+        for year in date_list:
+            year = str(year)
+            date_string = date_string + "," + year
+        return date_string[1:]
 
 # s = '<span class="metadata_unit-info metadata_unit-info--text_only">December 25, 2015</span>'
 # result = re.findall(r"\d{4,}", s)

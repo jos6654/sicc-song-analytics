@@ -9,4 +9,4 @@ class SongNumber(Analytic):
         This Analytic subclass very simply returns the length of the list of songs
         :return: The number of songs in the list
         """
-        return len(self.lyric_list)
+        return str(len(self.lyric_list))

@@ -10,5 +10,7 @@ class VocabularySize(Analytic):
         in order to eliminate duplicates and then converts back to a list.
         :return: The length of the new list
         """
-        lyrics = list(set(self.lyric_list))
-        return len(lyrics)
+        vocabulary_list = []
+        for lyrics in self.lyric_list:
+            vocabulary_list.extend(lyrics)
+        return str(len(set(vocabulary_list)))
