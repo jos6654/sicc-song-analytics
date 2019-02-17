@@ -3,6 +3,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 import json
 import song_retrieval
+import database
 
 app = Flask(__name__)
 
@@ -16,9 +17,21 @@ def analyze():
     app.logger.warning(request.get_json())
 
     # retrieve artist from request
-    artist = request.get_json()['artist']
+    artist = request.get_json()['artist'].lower()
+
+    # get artist id
+    artist_id = str(song_retrieval.get_artist_id(artist))
+
+    # check if the artist is already in the database
+    if database.check_artist(artist_id):
+        # if so, retrieve data and return
+        artist_stats = database.get_artist(artist_id)
+        #TODO format into json and return
+        return "ARTIST IN DB"
     
-    if song_retrieval.get_artist_id(artist)
+    # otherwise run analytics
+    song_retrieval.perform_analytics(int(artist_id), artist)
+
 
     #TODO:
     # request recieved, now we have to get artist ID
