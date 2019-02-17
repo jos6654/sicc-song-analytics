@@ -5,10 +5,12 @@
 
 import requests
 import re
+import time
 from bs4 import BeautifulSoup
 from fuzzywuzzy import fuzz
 from analytics.common_words import CommonWords
 from analytics.song_number import SongNumber
+
 
 
 artist = "slaughter beach, dog"
@@ -124,7 +126,10 @@ def remove_unneccessary_words(lyrics: list) -> list:
     """
 
     # list of words we want to remove
-    words = ['', 'the', 'i', 'a', 'an', 'of', 'with', 'at', 'from', 'into', 'and', 'or', 'but', 'so', 'for', 'yet', 'as', 'because', 'since', 'this', 'that', 'these', 'those']
+    words = ['', 'the', 'i', 'a', 'an', 'of', 'with', 'at', 'from', 'into', 'and',
+        'or', 'but', 'so', 'for', 'yet', 'as', 'because', 'since', 'this', 'that',
+        'these', 'those', 'in', 'to', 'on', 'all', 'you', 'my', 'it', 'me', 'your',
+        'when', 'out', 'up', 'be', 'is', 'if']
 
     return list(set(lyrics) - set(words))
 
@@ -148,3 +153,26 @@ print(lyric_list[1])
 
 print()
 """
+#TODO remove this eventually
+def main():
+    # retrieve artist id
+    id = get_artist_id(artist)
+    # get artist's song urls
+    song_urls = get_song_url_list(id)
+    
+    # for each song url, scrape the lyrics and append it to our lyric list
+    lyric_list = []
+
+    start = time.time()
+    for url in song_urls:
+        lyric_list.append(scrape_lyrics(url))
+    end = time.time()
+
+    print(f"Time to scrape all lyrics: {end-start}")
+    
+    start = time.time()
+    print(CommonWords(lyric_list=lyric_list).analyze())
+    end = time.time()
+    print(f"Time to find most common words: {end-start}")
+
+main()

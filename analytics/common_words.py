@@ -20,8 +20,10 @@ class CommonWords(Analytic):
         
         s = sorted(word_dict.items(), key = lambda x: x[1], reverse = True)
 
-        print(s[:3])
         print(f"Total Words: {total_words}")
+
+        return s[:3]
+        
 
 
 
