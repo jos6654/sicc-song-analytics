@@ -156,7 +156,6 @@ def perform_analytics(artistID):
     release_history = ReleaseHistory(url_list=song_urls).analyze()
 
 
-
 #TODO remove this eventually
 def main():
     # retrieve artist id
