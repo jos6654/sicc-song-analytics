@@ -16,7 +16,7 @@ import database
 
 #artist = "drake"
 
-access_token = '8ufzdCrKWOB3Gfgx6VJgenQt531yP7KGHM4tk_3u3LD7xA0J1nexqUnHgH5LJjPD'
+access_token = 'YOUR ACCESS TOKEN FOR THE GENIUS API HERE'
 
 def get_artist_id(artist_name: str) -> int:
     """Gets the artist's id from Genius

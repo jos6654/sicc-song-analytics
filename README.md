@@ -39,16 +39,22 @@ Previously I only had experience in Python from taking CS I, but to do this proj
 We also realized toward the middle of our project that our choice of using Genius API was poor because in order to get the actual song lyrics, we needed to take the url and scrape the lyrics which made our program take an ungodly amount of time to run.
 
 So evaluate your tools before you're in too deep
+
 ### Ryan
 
 ### Max
 
-First off, I love regular expressions, but wow did I learn to love them even more.
+First off, I love regular expressions, but wow did I learn to love them even more. We were able to use them for so many quick modifications to the text.
+
+Piggybacking off of what Joe said, I learned the valuable lesson of learning how to use your tools before attempting to use them. We should have seen that the Genius API was lacking in the services we needed, but at least we know now!
+
+I also learned how to write code that interacts with a database, which is definitely a skill I'll be using the future.
 
 ## General points
 
 * Is this project perfect? No.
-* Is this project going to get worked on after BrickHack 5? Probably not
+* Is this project going to get worked on after BrickHack 5? Probably not.
 * Is the code the most beautiful thing ever? We'd like to think so, but it has its short comings.
+* This was a learning experience for all of us, and we can all say that we've learned quite a bit!
 
 But all of this is OK! This is a learning experience for us and it's been a ton of fun!
