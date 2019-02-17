@@ -22,10 +22,14 @@ def get_artist(artist_id: str):
     sql = "SELECT * FROM artist WHERE artistID = %s"
     val = (artist_id,)
     cursor.execute(sql, val)
-    artist = []
+    artist = { }
+    temp = []
     result = cursor.fetchall()
-    for a in result:
-        artist.append(a)
+    artist["name"] = result[0][1]
+    artist["releaseHistory"] = result[0][2]
+    artist["commonWord"] = result[0][3]
+    artist["sizeVocab"] = result[0][4]
+    artist["numSongs"] = result[0][5]
     return artist
 
 

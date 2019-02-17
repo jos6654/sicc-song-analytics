@@ -29,11 +29,13 @@ def analyze():
     if database.check_artist(artist_id):
         # if so, retrieve data and return
         artist_stats = database.get_artist(artist_id)
-        #TODO format into json and return
-        return "ARTIST IN DB"
-    
+        return json.dumps(artist_stats)
+
     # otherwise run analytics
     song_retrieval.perform_analytics(int(artist_id), artist)
+
+    artist_stats = database.get_artist(artist_id)
+    return json.dumps(artist_stats)
 
 
     #TODO:
