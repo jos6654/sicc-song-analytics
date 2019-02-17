@@ -14,7 +14,7 @@ from analytics.song_number import SongNumber
 from analytics.vocabulary_size import VocabularySize
 import database
 
-artist = "slaughter beach, dog"
+artist = "drake"
 
 access_token = '8ufzdCrKWOB3Gfgx6VJgenQt531yP7KGHM4tk_3u3LD7xA0J1nexqUnHgH5LJjPD'
 
@@ -153,7 +153,7 @@ def perform_analytics(artistID, artistName):
 
     vocabulary_size = VocabularySize(lyric_list=lyric_list).analyze()
 
-    release_history = ReleaseHistory(url_list=song_urls).analyze()
+    release_history = "temp" #ReleaseHistory(url_list=song_urls).analyze()
 
     data = {"name": artistName, "releaseHistory": release_history, "commonWord":common_word, "numSongs": song_number, "sizeVocab":vocabulary_size}
 
