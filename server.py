@@ -13,6 +13,7 @@ def hello_world():
 
 @app.route('/analyze', methods=['POST'])
 def analyze():
+    
     #DEBUG
     app.logger.warning(request.get_json())
     app.logger.warning(type(request.get_json()))
@@ -37,13 +38,6 @@ def analyze():
     artist_stats = database.get_artist(artist_id)
     return json.dumps(artist_stats)
 
-
-    #TODO:
-    # request recieved, now we have to get artist ID
-    # if artist id is in database, return stats
-    # else, run analytics
-
-    return "gottem"
 
 if __name__ == '__main__':
     

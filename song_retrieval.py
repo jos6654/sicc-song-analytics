@@ -147,6 +147,7 @@ def perform_analytics(artistID, artistName):
 
     :param artistID: The ID of the artist whose analytics we are calculating
     """
+    # get all lyrics
     song_urls = get_song_url_list(artistID)
     lyric_list = []
     for url in song_urls:
@@ -154,6 +155,7 @@ def perform_analytics(artistID, artistName):
         if lyric:
             lyric_list.append(lyric)
 
+    # run all analytics
     common_word = CommonWords(lyric_list=lyric_list).analyze()[0]
 
     song_number = SongNumber(lyric_list=lyric_list).analyze()
@@ -162,8 +164,10 @@ def perform_analytics(artistID, artistName):
 
     release_history = "temp" #ReleaseHistory(url_list=song_urls).analyze()
 
+    # build data dictionary
     data = {"name": artistName, "releaseHistory": release_history, "commonWord":common_word, "numSongs": song_number, "sizeVocab":vocabulary_size}
 
+    # insert into database
     database.insert_artist(str(artistID), data)
 
 #TODO remove this eventually
