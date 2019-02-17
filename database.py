@@ -5,28 +5,17 @@ cursor = db.cursor()
 cursor.execute("USE songDatabase")
 
 
-def insert_artist(artist_id: str, artist_name: str):
+def insert_artist(artist_id: str, data: dict):
     sql = "DELETE FROM artist WHERE artistID = %s"
     val = (artist_id,)
     cursor.execute(sql, val)
     db.commit()
-    sql = "INSERT INTO artist(artistID, artistName) VALUES (%s, %s)"
-    val = (artist_id, artist_name)
+    sql = "INSERT INTO artist VALUES (%s, %s, %s, %s, %s, %s)"
+    val = (artist_id, data['name'], data['releaseHistory'], data['commonWord'], data['sizeVocab'],
+           data['overallAttitude'])
     cursor.execute(sql, val)
     db.commit()
     print(cursor.rowcount, "record added to ARTIST")
-
-
-def insert_song(artist_id: str, song_name: str):
-    sql = "DELETE FROM song WHERE artistID = %s AND songName = %s"
-    val = (artist_id, song_name)
-    cursor.execute(sql, val)
-    db.commit()
-    sql = "INSERT INTO song(artistID, songName) VALUES (%s, %s)"
-    val = (artist_id, song_name)
-    cursor.execute(sql, val)
-    db.commit()
-    print(cursor.rowcount, "record added to SONG")
 
 
 def get_artist(artist_id: str):
@@ -40,16 +29,6 @@ def get_artist(artist_id: str):
     return artist
 
 
-def get_song(artist_id: str, song_name:str):
-    sql = "SELECT * FROM song WHERE artistID = %s AND songName = %s"
-    val = (artist_id, song_name)
-    cursor.execute(sql, val)
-    song = []
-    result = cursor.fetchall()
-    for a in result:
-        song.append(a)
-    return song
-
 def check_artist(artist_id:str):
     sql = "SELECT artistID FROM artist WHERE artistID = %s"
     val = (artist_id,)
@@ -60,8 +39,4 @@ def check_artist(artist_id:str):
     else:
         result = True
     return result
-
-
-
-
 
