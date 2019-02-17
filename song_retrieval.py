@@ -55,21 +55,23 @@ def get_song_url_list(id: int) -> list:
     """
 
     # build and send search request to genius api
+    page = 1
     base_url = 'https://api.genius.com'
     headers = {'Authorization': f'Bearer {access_token}'}
-    search_url = f'{base_url}/artists/{id}/songs?per_page=50'
-    response = requests.get(search_url, headers=headers)
-    
-    json = response.json()
     url_list = []
     title_list = []
-    for song in json['response']['songs']:
-        if song['primary_artist']['id'] != id:
-            continue
-        title = song['title']
-        if not (duplicate_title(title_list, title)):
-            title_list.append(title)
-            url_list.append(song['url'])
+    while page != "None":
+        search_url = f'{base_url}/artists/{id}/songs?per_page=50&page={page}'
+        response = requests.get(search_url, headers=headers)
+        json = response.json()
+        for song in json['response']['songs']:
+            if song['primary_artist']['id'] != id:
+                continue
+            title = song['title']
+            if not (duplicate_title(title_list, title)):
+                title_list.append(title)
+                url_list.append(song['url'])
+        page = str(json['response']['next_page'])
     return url_list
 
 def duplicate_title(title_list: list, title: str) -> bool:
@@ -169,7 +171,7 @@ def perform_analytics(artistID, artistName):
 #TODO remove this eventually
 def main():
     # retrieve artist id
-    id = get_artist_id("drake")
+    id = get_artist_id("weezer")
     # get artist's song urls
     song_urls = get_song_url_list(id)
 
@@ -177,6 +179,7 @@ def main():
     lyric_list = []
 
     start = time.time()
+
     for url in song_urls:
         lyric = scrape_lyrics(url)
         if lyric:
