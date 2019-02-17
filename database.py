@@ -12,7 +12,7 @@ def insert_artist(artist_id: str, data: dict):
     db.commit()
     sql = "INSERT INTO artist VALUES (%s, %s, %s, %s, %s, %s)"
     val = (artist_id, data['name'], data['releaseHistory'], data['commonWord'], data['sizeVocab'],
-           data['overallAttitude'])
+           data['numSongs'])
     cursor.execute(sql, val)
     db.commit()
     print(cursor.rowcount, "record added to ARTIST")
@@ -29,7 +29,7 @@ def get_artist(artist_id: str):
     return artist
 
 
-def check_artist(artist_id:str):
+def check_artist(artist_id: str):
     sql = "SELECT artistID FROM artist WHERE artistID = %s"
     val = (artist_id,)
     cursor.execute(sql, val)
