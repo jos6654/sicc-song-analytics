@@ -11,8 +11,8 @@ from fuzzywuzzy import fuzz
 from analytics.common_words import CommonWords
 from analytics.release_history import ReleaseHistory
 from analytics.song_number import SongNumber
-
-
+from analytics.vocabulary_size import VocabularySize
+import database
 
 artist = "slaughter beach, dog"
 
@@ -134,26 +134,31 @@ def remove_unneccessary_words(lyrics: list) -> list:
 
     return list(set(lyrics) - set(words))
 
-    
+def perform_analytics(artistID, artistName):
+    """
+    Given that the analytics for a particular artist haven't been
+    calculated, take the artistID and calculate all analytics and
+    populate the database with those analytics
 
-#Tests
+    :param artistID: The ID of the artist whose analytics we are calculating
+    """
+    song_urls = get_song_url_list(artistID)
+    lyric_list = []
+    for url in song_urls:
+        lyric_list.append(scrape_lyrics(url))
 
-"""
-print(get_artist_id(artist))
-songs = get_song_url_list(get_artist_id(artist))
+    common_word = CommonWords(lyric_list=lyric_list).analyze()[0]
 
+    song_number = SongNumber(lyric_list=lyric_list).analyze()
 
-lyric_list = []
-for song in songs:
-    lyric_list.append(scrape_lyrics(song))
+    vocabulary_size = VocabularySize(lyric_list=lyric_list).analyze()
 
-print(lyric_list[1])
+    release_history = ReleaseHistory(url_list=song_urls).analyze()
 
-#test = SongNumber(lyric_list).analyze()
-#print(test)
+    data = {"name": artistName, "releaseHistory": release_history, "commonWord":common_word, "numSongs": song_number, "sizeVocab":vocabulary_size}
 
-print()
-"""
+    database.insert_artist(str(artistID), data)
+
 #TODO remove this eventually
 def main():
     # retrieve artist id
@@ -171,10 +176,9 @@ def main():
 
     print(f"Time to scrape all lyrics: {end-start}")
 
-    # start = time.time()
-    # print(CommonWords(lyric_list=lyric_list).analyze())
-    # end = time.time()
-    # print(f"Time to find most common words: {end-start}")
-    ReleaseHistory(url_list=song_urls).analyze()
+    start = time.time()
+    print(VocabularySize(lyric_list=lyric_list).analyze())
+    end = time.time()
+    print(f"Time to find most common words: {end-start}")
 
 main()
