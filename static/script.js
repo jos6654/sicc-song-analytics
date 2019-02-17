@@ -11,7 +11,7 @@ $(document).ready(function(){
         $.ajax({
             type: 'POST',
             url: '/analyze',
-            data: '{"artist":"' + $('#text').text() + '"}', // or JSON.stringify ({name: 'jonas'}),
+            data: '{"artist":"' + $('#text').val() + '"}', // or JSON.stringify ({name: 'jonas'}),
             success: function(data) { alert('data: ' + data); },
             contentType: "application/json",
             dataType: 'json'

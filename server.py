@@ -15,13 +15,16 @@ def hello_world():
 def analyze():
     #DEBUG
     app.logger.warning(request.get_json())
+    app.logger.warning(type(request.get_json()))
+    app.logger.warning(request.get_json()['artist'])
 
     # retrieve artist from request
     artist = request.get_json()['artist'].lower()
 
     # get artist id
-    artist_id = str(song_retrieval.get_artist_id(artist))
+    artist_id = (song_retrieval.get_artist_id(artist))
 
+    app.logger.warning(artist_id)
     # check if the artist is already in the database
     if database.check_artist(artist_id):
         # if so, retrieve data and return

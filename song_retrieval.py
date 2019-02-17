@@ -14,7 +14,7 @@ from analytics.song_number import SongNumber
 from analytics.vocabulary_size import VocabularySize
 import database
 
-artist = "drake"
+#artist = "drake"
 
 access_token = '8ufzdCrKWOB3Gfgx6VJgenQt531yP7KGHM4tk_3u3LD7xA0J1nexqUnHgH5LJjPD'
 
@@ -40,8 +40,9 @@ def get_artist_id(artist_name: str) -> int:
     # loop through all hits in search
     for hit in json['response']['hits']:
         # if the artist we searched for is this hit, return the artist's id
-        if artist.lower() in hit['result']['primary_artist']['name'].lower():
+        if artist_name.lower() == hit['result']['primary_artist']['name'].lower():
             return hit['result']['primary_artist']['id']
+
 
 def get_song_url_list(id: int) -> list:
     """Gets list of urls of songs by an artist
@@ -168,7 +169,7 @@ def perform_analytics(artistID, artistName):
 #TODO remove this eventually
 def main():
     # retrieve artist id
-    id = get_artist_id(artist)
+    id = get_artist_id("drake")
     # get artist's song urls
     song_urls = get_song_url_list(id)
 
@@ -188,5 +189,3 @@ def main():
     print(VocabularySize(lyric_list=lyric_list).analyze())
     end = time.time()
     print(f"Time to find most common words: {end-start}")
-
-main()
