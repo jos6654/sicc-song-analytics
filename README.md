@@ -28,6 +28,8 @@ I (Max) was walking to class listening to 'Slaughter Beach, Dog' and I realised 
 
 ### Joe
 
+Previously I only had experience in Python from taking CS I, but to do this project I learned a bunch about using different libraries to accomplish tasks more easily. I also learned how to do some object-oriented programming in Python which was useful.
+
 ### Ryan
 
 ### Max
