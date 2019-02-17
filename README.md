@@ -36,6 +36,9 @@ Another odd issue with their API was that 'blink-182's artist name is stored wit
 
 Previously I only had experience in Python from taking CS I, but to do this project I learned a bunch about using different libraries to accomplish tasks more easily. I also learned how to do some object-oriented programming in Python which was useful.
 
+We also realized toward the middle of our project that our choice of using Genius API was poor because in order to get the actual song lyrics, we needed to take the url and scrape the lyrics which made our program take an ungodly amount of time to run.
+
+So evaluate your tools before you're in too deep
 ### Ryan
 
 ### Max
