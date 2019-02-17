@@ -28,7 +28,7 @@ I (Max) was walking to class listening to 'Slaughter Beach, Dog' and I realised 
 
 Our main problem was the Genius API. We feel that there is much to be improved, particularly the addition of the ability to request a song's lyrics would be helpful.
 
-Another odd issue with their API was that 'blink-182's artist name is stored with 2 zero width space characters (\u200b) preceding their name. WHY? There is no reason at all, and blink-182 is the **ONLY** artist where this is the case. It's especially unfortunate because blink-182 is Ryan's favorite band.
+Another odd issue with their API was that 'blink-182's artist name is stored with 2 zero width space characters (\u200b) preceding their name. **WHY?** There is no reason at all, and blink-182 is the **ONLY** artist where this is the case. It's especially unfortunate because blink-182 is Ryan's favorite band.
 
 ## What did we learn?
 
