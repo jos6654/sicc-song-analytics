@@ -9,6 +9,7 @@ import time
 from bs4 import BeautifulSoup
 from fuzzywuzzy import fuzz
 from analytics.common_words import CommonWords
+from analytics.release_history import ReleaseHistory
 from analytics.song_number import SongNumber
 
 
@@ -159,7 +160,7 @@ def main():
     id = get_artist_id(artist)
     # get artist's song urls
     song_urls = get_song_url_list(id)
-    
+
     # for each song url, scrape the lyrics and append it to our lyric list
     lyric_list = []
 
@@ -169,10 +170,11 @@ def main():
     end = time.time()
 
     print(f"Time to scrape all lyrics: {end-start}")
-    
-    start = time.time()
-    print(CommonWords(lyric_list=lyric_list).analyze())
-    end = time.time()
-    print(f"Time to find most common words: {end-start}")
+
+    # start = time.time()
+    # print(CommonWords(lyric_list=lyric_list).analyze())
+    # end = time.time()
+    # print(f"Time to find most common words: {end-start}")
+    ReleaseHistory(url_list=song_urls).analyze()
 
 main()

@@ -17,8 +17,16 @@ class ReleaseHistory(Analytic):
         for url in self.url_list:
             page = requests.get(url)
             html = BeautifulSoup(page.text, 'html.parser')
-            date = html.select('.metadata_unit .metadata_unit-info--text_only')[0]
-            result = re.match(r"\d{4}", date)[0]
-            date_list.append(result)
-            print(result)
+            date = html.select('.metadata_unit .metadata_unit-info--text_only')
+            if date:
+                for i in date:
+                    i = str(i)
+                    result = re.findall(r"\d{4,}", i)
+                    if result:
+                        date_list.append(int(result[0]))
+        print(date_list)
         return date_list
+
+# s = '<span class="metadata_unit-info metadata_unit-info--text_only">December 25, 2015</span>'
+# result = re.findall(r"\d{4,}", s)
+# print(result)
