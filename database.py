@@ -50,4 +50,18 @@ def get_song(artist_id: str, song_name:str):
         song.append(a)
     return song
 
+def check_artist(artist_id:str):
+    sql = "SELECT artistID FROM artist WHERE artistID = %s"
+    val = (artist_id,)
+    cursor.execute(sql, val)
+    print(cursor.fetchall())
+    if cursor.rowcount == 0:
+        result = False
+    else:
+        result = True
+    return result
+
+
+
+
 
