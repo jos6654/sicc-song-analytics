@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="shortcut icon" href="../static/teddy.jpg">
-    <link rel="stylesheet" href="../static/style_index.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='teddy.jpg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_index.css') }}">
     <meta charset="UTF-8">
+    <!-- This might need to change based on how flask gets static files-->
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.3.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
     <title>Song Analyzer</title>
 </head>
 <body>
     <h1>SONG ANALYZER</h1>
     <form class="inputBox">
-        <input type="text" size="40">
-        <input type="submit" value="GO!"><br />
+        <input type="text" id="text" size="40">
+        <input type="submit" id="submit" value="GO!"><br />
+        
     </form>
+
+    <button id="submit-data">Go</button>
 </body>
 </html>
