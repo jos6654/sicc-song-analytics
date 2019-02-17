@@ -175,7 +175,7 @@ def perform_analytics(artistID, artistName):
 #TODO remove this eventually
 def main():
     # retrieve artist id
-    id = get_artist_id("weezer")
+    id = get_artist_id("blink-182")
     # get artist's song urls
     song_urls = get_song_url_list(id)
 
@@ -196,3 +196,4 @@ def main():
     print(VocabularySize(lyric_list=lyric_list).analyze())
     end = time.time()
     print(f"Time to find most common words: {end-start}")
+
