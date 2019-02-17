@@ -98,7 +98,11 @@ def scrape_lyrics(url: str) -> list:
 
     page = requests.get(url)
     html = BeautifulSoup(page.text, "html.parser")
-    lyrics = html.find('div', class_="lyrics").get_text()
+    lyrics = html.find('div', class_="lyrics")
+    if lyrics:
+        lyrics = lyrics.get_text()
+    else:
+        lyrics = ""
 
     # capture all bracketed section of lyrics (ie: [Chorus], [Bridge], [Verse 1])
     # and replace with nothing
@@ -145,7 +149,9 @@ def perform_analytics(artistID, artistName):
     song_urls = get_song_url_list(artistID)
     lyric_list = []
     for url in song_urls:
-        lyric_list.append(scrape_lyrics(url))
+        lyric = scrape_lyrics(url)
+        if lyric:
+            lyric_list.append(lyric)
 
     common_word = CommonWords(lyric_list=lyric_list).analyze()[0]
 
@@ -171,7 +177,9 @@ def main():
 
     start = time.time()
     for url in song_urls:
-        lyric_list.append(scrape_lyrics(url))
+        lyric = scrape_lyrics(url)
+        if lyric:
+            lyric_list.append(lyric)
     end = time.time()
 
     print(f"Time to scrape all lyrics: {end-start}")
