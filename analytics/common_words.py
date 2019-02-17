@@ -22,7 +22,7 @@ class CommonWords(Analytic):
 
         print(f"Total Words: {total_words}")
 
-        return s[:3]
+        return s[:10]
         
 
 
