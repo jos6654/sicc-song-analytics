@@ -6,7 +6,7 @@ Sicc Song Analytics (SSA) is a lyric analytical engine built in Python using the
 
 ## How does it work?
 
-SSA consists of two main parts, a front end built on Flask, and a backend.
+SSA consists of two main parts, a front end to send requests to a Flask server, and a backend written in Python.
 
 ### The Front End
 
